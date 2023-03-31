@@ -5,6 +5,24 @@ let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highscore = 0;
 
+let input = document.querySelector('.guess');
+
+input.addEventListener('keypress', function (event) {
+  if (event.key == 'Enter') {
+    event.preventDefault();
+    document.querySelector('.btn.check').click(); // Enter key = check score
+    input.value = ''; // Sets input blank on Enter
+  }
+});
+
+// Reset on tab btn
+input.addEventListener('keydown', function (event) {
+  if (event.key === 'Tab') {
+    event.preventDefault();
+    document.querySelector('.again').click();
+  }
+});
+
 const displayMessage = function (message) {
   document.querySelector('.message').textContent = message;
 };
@@ -29,6 +47,26 @@ document.querySelector('.check').addEventListener('click', function () {
     displayMessage(`😁 Correct! It was ${guess}`);
     displayNumber(secretNumber);
 
+    // Change background colour on winning
+    let colors = [
+      '#60b347',
+      '#8bc34a',
+      '#cddc39',
+      '#ffeb3b',
+      '#ffc107',
+      '#ff9800',
+      '#ff5722',
+    ];
+    let i = 0;
+    let intervalId = setInterval(function () {
+      document.querySelector('body').style.backgroundColor = colors[i];
+      i = (i + 1) % colors.length;
+    }, 30); // Animation speed (ms)
+
+    setTimeout(function () {
+      clearInterval(intervalId);
+      document.querySelector('body').style.backgroundColor = '#222';
+    }, 5000); // Duration (seconds)
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
 
@@ -49,7 +87,7 @@ document.querySelector('.check').addEventListener('click', function () {
       score--;
       displayScore(score);
     } else {
-      displayMessage('👹 You lost the game!');
+      displayMessage('👹 You lost the game! Press TAB to play');
       displayScore(0);
     }
   }
