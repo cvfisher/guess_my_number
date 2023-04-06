@@ -49,13 +49,13 @@ document.querySelector('.check').addEventListener('click', function () {
 
     // Change background colour on winning
     let colors = [
-      '#60b347',
-      '#8bc34a',
-      '#cddc39',
-      '#ffeb3b',
-      '#ffc107',
-      '#ff9800',
-      '#ff5722',
+      '#00eeff',
+      '#ff3f8c',
+      '#00ff73',
+      '#ff9300',
+      '#ad36ff',
+      '#ddff00',
+      '#ff20ee',
     ];
     let i = 0;
     let intervalId = setInterval(function () {
